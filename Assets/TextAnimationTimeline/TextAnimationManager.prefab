@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 144288377729592972}
   - component: {fileID: 144288377729592971}
   m_Layer: 0
-  m_Name: TextAnimationManager 1
+  m_Name: TextAnimationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

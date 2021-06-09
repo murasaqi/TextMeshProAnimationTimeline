@@ -1,0 +1,12 @@
+{
+  "name": "com.murasaqi.textmeshpro_animation_timeline",
+  "displayName": "TextMeshPro Animation Timeline",
+  "version": "0.1.1",
+  "unity": "2020.3.7",
+  "description": "TextMeshPro Animation Timeline",
+  "keywords": [
+    "Script",
+    "editorextensions"
+  ],
+  "unityRelease": "7f1"
+}
