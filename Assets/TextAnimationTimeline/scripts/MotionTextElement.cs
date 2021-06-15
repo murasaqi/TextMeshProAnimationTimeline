@@ -16,7 +16,7 @@ namespace TextAnimationTimeline
     public class MotionTextElement : MonoBehaviour
     {
 
-        [ExecuteInEditMode]
+        // [ExecuteInEditMode]
         private TextMeshElement _textMeshElement;
         private TMP_FontAsset _font;
         private MotionTextAlignmentOptions _motionTextAlignmentOptions;

@@ -10,7 +10,7 @@ namespace TextAnimationTimeline
         BasicFadeInOut,
         BasicFadeInOutVertical,
         BasicGameTextBoxAnimation,
-        // Slash,
+        SurfaceOut,
         // CutSlash,
         // LaidWords,
         // LaidWords_FromTheLeft,

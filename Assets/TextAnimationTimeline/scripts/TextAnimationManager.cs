@@ -69,6 +69,9 @@ namespace TextAnimationTimeline
                 case AnimationType.BasicFadeInOut:
                     motion = go.AddComponent<BasicFadeInOut>();
                     break;
+                case AnimationType.SurfaceOut:
+                    motion = go.AddComponent<SurfaceOut>();
+                    break;
                 
                 case AnimationType.BasicGameTextBoxAnimation:
                     motion = go.AddComponent<BasicGameTextBoxAnimation>();
