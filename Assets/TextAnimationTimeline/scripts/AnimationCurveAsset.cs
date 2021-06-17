@@ -33,6 +33,9 @@ namespace TextAnimationTimeline
         public AnimationCurve HorizontalLineOut;
         public AnimationCurve BigWordMove;
         public AnimationCurve BigWordInOut;
+        public AnimationCurve MigrateWave;
+        public AnimationCurve MigrateAlpha;
+        public AnimationCurve MigrateWavePower;
 
     }
 }
