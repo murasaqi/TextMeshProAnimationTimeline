@@ -77,9 +77,9 @@ namespace TextAnimationTimeline
                     motion = go.AddComponent<BasicGameTextBoxAnimation>();
                     break;
                 
-                // case AnimationType.Slash:
-                //     motion = go.AddComponent<BackgroundSlashs>();
-                //     break;
+                case AnimationType.MigrateFishWord:
+                    motion = go.AddComponent<MigratoryFishWord>();
+                    break;
                 //
                 // case AnimationType.CutSlash:
                 //     motion = go.AddComponent<CutSlash>();
