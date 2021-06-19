@@ -8,7 +8,6 @@ using UnityEngine.Timeline;
 namespace TextAnimationTimeline
 {
 	[TrackClipType(typeof(TextAnimationControlClip))]
-//	[TrackBindingType(typeof(Light))]
 	[TrackBindingType(typeof(TextAnimationManager))]
 	
 
@@ -31,5 +30,20 @@ namespace TextAnimationTimeline
 			
 			return mixer;
 		}
+		public override void GatherProperties(PlayableDirector director, IPropertyCollector driver)
+		{
+#if UNITY_EDITOR
+			TextAnimationManager trackBinding = director.GetGenericBinding(this) as TextAnimationManager;
+			if (trackBinding == null)
+				return;
+			foreach (Transform child in trackBinding.ParentGameObject.transform)
+			{
+				DestroyImmediate(child);
+			}
+#endif
+			base.GatherProperties(director, driver);
+		}
+		
+		
 	}
 }

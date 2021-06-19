@@ -20,7 +20,7 @@ namespace TextAnimationTimeline
         public bool DebugMode = true;
         public Camera mainCamera;
         public Vector3 Resolution;
-       
+        private List<MotionTextElement> _created = new List<MotionTextElement>();
 //        private TMProCapture tmProCapture;
         public Camera CaptureCamera;
        public TextAnimationGraphics graphics;
@@ -33,7 +33,7 @@ namespace TextAnimationTimeline
 
         void Init()
         {
-
+            _created.Clear();
         }
 
         void Update()
@@ -52,8 +52,8 @@ namespace TextAnimationTimeline
             go.transform.SetParent(parent);
             // go.transform.localPosition = Vector3.zero;
             // go.transform.localEulerAngles = Vector3.zero;
-   
             var motion = SelectMotionType(animationType, go);
+            _created.Add(motion);
             return motion;   
         }
 
@@ -155,6 +155,28 @@ namespace TextAnimationTimeline
             
             
             return motion;
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var mo in _created)
+            {
+                if (mo != null)
+                {
+                    GameObject.DestroyImmediate(mo);
+                }
+            }
+        }
+        
+        private void OnDisable()
+        {
+            foreach (var mo in _created)
+            {
+                if (mo != null)
+                {
+                    GameObject.DestroyImmediate(mo);
+                }
+            }
         }
     }
 }
