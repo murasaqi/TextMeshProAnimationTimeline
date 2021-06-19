@@ -39,7 +39,7 @@ namespace TextAnimationTimeline.Motions
             var width =cellSize;
             
            
-            Debug.Log("width: " + width + "," + "height: " + height);
+            // Debug.Log("width: " + width + "," + "height: " + height);
             text.transform.localPosition = new Vector3(camera.transform.localPosition.x,camera.transform.localPosition.y,camera.transform.localPosition.z+1);
             var Screen = new RenderTexture((int)width,(int)height,8,RenderTextureFormat.ARGB32);
             

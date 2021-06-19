@@ -6,6 +6,7 @@ using TextAnimationTimeline;
 //using TextAnimationGenerater.Motions;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.TextCore.LowLevel;
 using UnityEngine.Timeline;
 using Debug = UnityEngine.Debug;
 
@@ -22,11 +23,13 @@ namespace TextAnimationTimeline
 		internal PlayableDirector m_PlayableDirector;
 		private List<PlayableBehaviour> inputs = new List<PlayableBehaviour>();
 		private List<MotionTextElement> motionTextElements = new List<MotionTextElement>();
+		private List<MotionTextElement> _motions = new List<MotionTextElement>();
+		private TextAnimationManager _textAnimationManager;
 		public override void ProcessFrame(Playable playable, FrameData info, object playerData)
 		{
-			TextAnimationManager trackBinding = playerData as TextAnimationManager;
+			_textAnimationManager = playerData as TextAnimationManager;
 	
-			if (!trackBinding)
+			if (!_textAnimationManager)
 				return;
 
 			double time = m_PlayableDirector.time;
@@ -37,21 +40,18 @@ namespace TextAnimationTimeline
 				var motion = motionTextElements[i];
 				if (motion != null)
 				{
-					// Debug.Log(motion.name);
 					if (time < motion.clip.start || motion.clip.end < time)
 					{
 						motionTextElements.RemoveAt(i);
 						motion.textAnimationControlBehaviour.motionTextElement = null;
 						motion.Remove();
 					}
-
 				}
 
 			}
 			foreach (var clip in clips)
 			{
 				counter++;
-				
 				var inputPlayable = (ScriptPlayable<TextAnimationControlBehaviour>) playable.GetInput(counter - 1);
 				var input = inputPlayable.GetBehaviour();
 				if (clip.end < time)
@@ -69,17 +69,18 @@ namespace TextAnimationTimeline
 				{
 					if (!input.motionTextElement)
 					{
-						var motion = trackBinding.CreateMotionTextElement(clip.displayName, input.animationType);
+						var motion = _textAnimationManager.CreateMotionTextElement(clip.displayName, input.animationType);
+						_motions.Add(motion);
 						motion.clip = clip;
 						motion.textAnimationControlBehaviour = input;
 						motion.transform.localScale = input.offsetLocalScale;
 						motion.transform.localEulerAngles = input.offsetEulerAngles;
 						motion.transform.localPosition = input.offsetLocalPosition;
-						motion.textAnimationManager = trackBinding;
-						motion.DebugMode = trackBinding.DebugMode;
-						motion.Font = input.overrideFont ? input.overrideFont : trackBinding.BaseFont;
-						motion.FontSize = input.fontSize >= 0 ? input.fontSize : trackBinding.BaseFontSize;
-						motion.Parent = trackBinding.ParentGameObject != null ? trackBinding.ParentGameObject.transform : trackBinding.transform;
+						motion.textAnimationManager = _textAnimationManager;
+						motion.DebugMode = _textAnimationManager.DebugMode;
+						motion.Font = input.overrideFont ? input.overrideFont : _textAnimationManager.BaseFont;
+						motion.FontSize = input.fontSize >= 0 ? input.fontSize : _textAnimationManager.BaseFontSize;
+						motion.Parent = _textAnimationManager.ParentGameObject != null ? _textAnimationManager.ParentGameObject.transform : _textAnimationManager.transform;
 						if (input.overrideParent != null) motion.Parent = input.overrideParent.transform;
 						motion.transform.SetParent(motion.Parent,false);
 						
@@ -108,14 +109,42 @@ namespace TextAnimationTimeline
 					input.isCreate = false;
 				}
 
-
-
-				// if (input.motionTextElement && time < clip.start)
-				// {
-				// 	input.motionTextElement.Remove();
-				// 	input.motionTextElement = null;
-				// }
 			}
+		}
+
+
+		//
+		// public override void OnPlayableCreate(Playable playable)
+		// {
+		// 	base.OnPlayableCreate(playable);
+		// }
+
+		public override void OnPlayableDestroy(Playable playable)
+		{
+			var count = 0;
+			foreach (var clip in clips)
+			{
+				var inputPlayable = (ScriptPlayable<TextAnimationControlBehaviour>) playable.GetInput(count);
+				var input = inputPlayable.GetBehaviour();
+				
+				if (input != null &&input.motionTextElement != null )
+				{
+					GameObject.DestroyImmediate(input.motionTextElement);
+					input.motionTextElement = null;
+				}
+				count++;
+			}
+
+			// if (_textAnimationManager != null && _textAnimationManager.ParentGameObject != null)
+			// {
+			// 	foreach (Transform child in _textAnimationManager.ParentGameObject.transform)
+			// 	{
+			// 		if (child!=null)
+			// 		{
+			// 			GameObject.DestroyImmediate(child);	
+			// 		}
+			// 	}	
+			// }
 		}
 	}
 }
