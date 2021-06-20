@@ -39,9 +39,9 @@ namespace TextAnimationTimeline.Motions
             foreach (var tmPro in TextMeshElement.Children)
             {
 
-                // int num = Random.Range(0, 4);
-                string name =  $"TextPrefab/FlyOffPaper";
-                // Debug.Log(name);
+                int num = Random.Range(0, 3);
+                string name =  $"TextPrefab/FlyOffPaper0{num}";
+                Debug.Log(name);
                 
                 var tex = Graphics.TMProToTex2D(tmPro, 1000, textAnimationManager.CaptureCamera);
                 var obj = GameObject.Instantiate(Resources.Load<GameObject>(name));
@@ -52,12 +52,13 @@ namespace TextAnimationTimeline.Motions
                 renderer.sharedMaterial.SetFloat("_Alpha",0f);
                 obj.transform.SetParent(transform);
                 
-                obj.transform.localEulerAngles = new Vector3(0, -180, 0);
+                obj.transform.localEulerAngles = new Vector3(90, 180, 0);
                 obj.transform.localScale = new Vector3(scale, scale, scale);
                 obj.transform.localPosition = new Vector3(x, offsetY, 0);
                 _characters.Add(obj);
                 _characterAlembics.Add(obj.GetComponent<AlembicStreamPlayer>());
                 _characterMaterials.Add(renderer.sharedMaterial);
+                obj.transform.GetChild(0).transform.localEulerAngles = new Vector3(0, 0, 0);
                 x += scale*width;
                 tmPro.alpha = 0f;
             }
@@ -105,7 +106,7 @@ namespace TextAnimationTimeline.Motions
          
             var count = 0;
             var totalDelay = 0.2f;
-            var fadeOutDuration = 0.4f;
+            var fadeOutDuration = 0.5f;
             var totalFadeinDuration = 1f - fadeOutDuration;
             var delayStep = totalDelay/(_characters.Count-1);
             // var characterDuration = (1f - totalDelay)/_characters.Count;
@@ -120,7 +121,7 @@ namespace TextAnimationTimeline.Motions
                     var progress = Mathf.Clamp(((float) normalizedTime - delay) /characterDuration, 0f, 1f);
                     progress *= 0.5f;
                     // alembic.CurrentTime = animationCurveAsset.MigrateWave.Evaluate(progress)* alembic.Duration;
-                    mat.SetFloat("_Alpha",animationCurveAsset.MigrateAlpha.Evaluate(progress));
+                    mat.SetFloat("_Alpha",animationCurveAsset.FlyOffAlpha.Evaluate(progress));
                     mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(progress))*_wavePower);
                 }
                 if (normalizedTime >= 1f-fadeOutDuration)
@@ -128,7 +129,7 @@ namespace TextAnimationTimeline.Motions
                     var progress = Mathf.Clamp(((float) normalizedTime - totalFadeinDuration) / fadeOutDuration, 0f, 1f);
                     var fadeOutProgress =0.5f + 0.5f* Mathf.Clamp(((float) normalizedTime - totalFadeinDuration  ) / fadeOutDuration, 0f, 1f);
                     alembic.CurrentTime = animationCurveAsset.MigrateWave.Evaluate(progress)* alembic.Duration;
-                    _characterMaterials[count].SetFloat("_Alpha",animationCurveAsset.MigrateAlpha.Evaluate(fadeOutProgress));
+                    _characterMaterials[count].SetFloat("_Alpha",animationCurveAsset.FlyOffAlpha.Evaluate(fadeOutProgress));
                     mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(fadeOutProgress))*_wavePower);
                 }
             

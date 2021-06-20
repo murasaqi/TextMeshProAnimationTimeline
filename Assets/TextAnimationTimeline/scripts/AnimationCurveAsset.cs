@@ -36,6 +36,7 @@ namespace TextAnimationTimeline
         public AnimationCurve MigrateWave;
         public AnimationCurve MigrateAlpha;
         public AnimationCurve MigrateWavePower;
+        public AnimationCurve FlyOffAlpha;
 
     }
 }
