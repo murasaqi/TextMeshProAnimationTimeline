@@ -80,10 +80,10 @@ namespace TextAnimationTimeline
                 case AnimationType.MigrateFishWord:
                     motion = go.AddComponent<MigratoryFishWord>();
                     break;
-                //
-                // case AnimationType.CutSlash:
-                //     motion = go.AddComponent<CutSlash>();
-                //     break;
+                
+                case AnimationType.FlyOffWord:
+                    motion = go.AddComponent<FlyOffWord>();
+                    break;
                 //
                 // case AnimationType.LaidWords:
                 //     motion = go.AddComponent<LaidWords>();

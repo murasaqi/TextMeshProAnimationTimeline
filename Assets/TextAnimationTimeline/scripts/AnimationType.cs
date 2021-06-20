@@ -12,6 +12,7 @@ namespace TextAnimationTimeline
         BasicGameTextBoxAnimation,
         SurfaceOut,
         MigrateFishWord,
+        FlyOffWord,
         // CutSlash,
         // LaidWords,
         // LaidWords_FromTheLeft,

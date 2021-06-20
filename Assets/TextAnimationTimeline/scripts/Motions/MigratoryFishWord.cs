@@ -42,6 +42,8 @@ namespace TextAnimationTimeline.Motions
                 int num = Random.Range(0, 4);
                 string name =  $"TextPrefab/CurveFlowPlane0{num}";
                 // Debug.Log(name);
+                tmPro.color = Color.white;
+                
                 
                 var tex = Graphics.TMProToTex2D(tmPro, 1000, textAnimationManager.CaptureCamera);
                 var obj = GameObject.Instantiate(Resources.Load<GameObject>(name));

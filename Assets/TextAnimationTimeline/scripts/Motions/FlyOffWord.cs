@@ -119,17 +119,17 @@ namespace TextAnimationTimeline.Motions
                 {
                     var progress = Mathf.Clamp(((float) normalizedTime - delay) /characterDuration, 0f, 1f);
                     progress *= 0.5f;
-                    alembic.CurrentTime = animationCurveAsset.MigrateWave.Evaluate(progress)* alembic.Duration;
+                    // alembic.CurrentTime = animationCurveAsset.MigrateWave.Evaluate(progress)* alembic.Duration;
                     mat.SetFloat("_Alpha",animationCurveAsset.MigrateAlpha.Evaluate(progress));
                     mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(progress))*_wavePower);
                 }
                 if (normalizedTime >= 1f-fadeOutDuration)
                 {
-                    
-                    var progress =0.5f + 0.5f* Mathf.Clamp(((float) normalizedTime - totalFadeinDuration  ) / fadeOutDuration, 0f, 1f);
+                    var progress = Mathf.Clamp(((float) normalizedTime - totalFadeinDuration) / fadeOutDuration, 0f, 1f);
+                    var fadeOutProgress =0.5f + 0.5f* Mathf.Clamp(((float) normalizedTime - totalFadeinDuration  ) / fadeOutDuration, 0f, 1f);
                     alembic.CurrentTime = animationCurveAsset.MigrateWave.Evaluate(progress)* alembic.Duration;
-                    _characterMaterials[count].SetFloat("_Alpha",animationCurveAsset.MigrateAlpha.Evaluate(progress));
-                    mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(progress))*_wavePower);
+                    _characterMaterials[count].SetFloat("_Alpha",animationCurveAsset.MigrateAlpha.Evaluate(fadeOutProgress));
+                    mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(fadeOutProgress))*_wavePower);
                 }
             
             //     
