@@ -38,7 +38,7 @@ namespace TextAnimationTimeline
 				return;
 			foreach (Transform child in trackBinding.ParentGameObject.transform)
 			{
-				DestroyImmediate(child);
+				DestroyImmediate(child.gameObject);
 			}
 #endif
 			base.GatherProperties(director, driver);
