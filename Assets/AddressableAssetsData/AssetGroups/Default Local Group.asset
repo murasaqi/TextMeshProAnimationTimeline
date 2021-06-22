@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4f82867889ab7724d8566c77685d8e7b
+  m_SerializeEntries:
+  - m_GUID: 6ca606db2cfc5d04e93abe93d319073b
+    m_Address: TextPrefab/CurveFlowPlane00
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c8c13aa7d5d9eab4789e48f5dd4a6f97
+    m_Address: TextPrefab/CurveFlowPlane01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 698d878cd9985534687933d9db30ef4e
+    m_Address: TextPrefab/CurveFlowPlane02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: ba5f5c973d0cc1a49a393c874b033299
+    m_Address: TextPrefab/CurveFlowPlane03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 241b5a040d7abca489ff7a7dcb25f811, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0685bebce95ab4f4b907d6245a509822, type: 2}
+    - {fileID: 11400000, guid: 86c94b3c5d62ae44695ff973b78f1c2c, type: 2}

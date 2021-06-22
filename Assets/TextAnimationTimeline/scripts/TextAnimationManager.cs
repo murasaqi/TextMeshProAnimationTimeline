@@ -14,6 +14,7 @@ namespace TextAnimationTimeline
     public class TextAnimationManager : MonoBehaviour
     {
         public AnimationCurveAsset AnimationCurves;
+        public MotionElementAsset MotionElementAsset;
         public TMP_FontAsset BaseFont;
         public float BaseFontSize = 10;
         public GameObject ParentGameObject;

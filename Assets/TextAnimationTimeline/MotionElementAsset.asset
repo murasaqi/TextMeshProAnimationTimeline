@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdcd440f5b43904093900853a1cdbe1, type: 3}
+  m_Name: MotionElementAsset
+  m_EditorClassIdentifier: 
+  CurveFlowPlane00: {fileID: 1379827015941168698, guid: ae7cfbca2c8b20149851ab0e97904340, type: 3}
+  CurveFlowPlane01: {fileID: 7292791431326733964, guid: 2e5b46c7c6b980244bc315defc72e77d, type: 3}
+  CurveFlowPlane02: {fileID: 8296927353844111372, guid: e6ade70dbdf4e064d981aa4c0f7e8b0b, type: 3}
+  CurveFlowPlane03: {fileID: 8276706538571550340, guid: a9f218277d4db184a8ecb665dde99854, type: 3}
+  FlyOffPaper00: {fileID: 4828851389161851396, guid: 4a6473011bb50f644987b1c22290753b, type: 3}
+  FlyOffPaper01: {fileID: 6139851611097930207, guid: db4517d25d338904bb436a9764dcf18b, type: 3}
+  FlyOffPaper02: {fileID: 6305755232150886244, guid: fef43008ce359d2418130c16d82aa2cf, type: 3}

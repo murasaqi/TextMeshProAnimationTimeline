@@ -18,6 +18,7 @@ namespace TextAnimationTimeline.Motions
         private List<AlembicStreamPlayer> _characterAlembics = new List<AlembicStreamPlayer>();
         private List<GameObject> _characters = new List<GameObject>();
         private float _wavePower = 14;
+        private List<GameObject> _alembicPrefabs = new List<GameObject>();
         private void OnEnable()
         {
             // Init("A",1);
@@ -25,6 +26,10 @@ namespace TextAnimationTimeline.Motions
 
         public override void Init(string word, double duration)
         {
+            
+            _alembicPrefabs.Add(textAnimationManager.MotionElementAsset.FlyOffPaper00);
+            _alembicPrefabs.Add(textAnimationManager.MotionElementAsset.FlyOffPaper01);
+            _alembicPrefabs.Add(textAnimationManager.MotionElementAsset.FlyOffPaper02);
             TextMeshElement = CreateTextMeshElement(word, Font, FontSize);
             TextMeshElement.MotionTextAlignmentOptions = MotionTextAlignmentOptions.MiddleCenter;
             TextMeshElement.alpha = 1f;
@@ -44,7 +49,7 @@ namespace TextAnimationTimeline.Motions
                 Debug.Log(name);
                 
                 var tex = Graphics.TMProToTex2D(tmPro, 1000, textAnimationManager.CaptureCamera);
-                var obj = GameObject.Instantiate(Resources.Load<GameObject>(name));
+                var obj = Instantiate(_alembicPrefabs[Random.Range(0,_alembicPrefabs.Count)]);
                
                 var renderer = obj.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
                 renderer.sharedMaterial = new Material(Resources.Load<Shader>("Materials/WaterWaveShader"));
