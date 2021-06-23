@@ -75,7 +75,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6983ab2008f7a9f499b3f8cd6bec328d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamDescriptor: {fileID: -9185553809550324106, guid: 7962adc1d735ad048a20f73e83ede2cc, type: 3}
+  streamSource: 0
+  streamDescriptor: {fileID: -9185553809550324106, guid: 7962adc1d735ad048a20f73e83ede2cc,
+    type: 3}
+  embeddedStreamDescriptor:
+    pathToAbc: 
+    settings:
+      normals: 1
+      tangents: 1
+      cameraAspectRatio: 2
+      importVisibility: 1
+      scaleFactor: 0.01
+      swapHandedness: 1
+      flipFaces: 0
+      interpolateSamples: 1
+      importPointPolygon: 1
+      importLinePolygon: 1
+      importTrianglePolygon: 1
+      importXform: 1
+      importCameras: 1
+      importMeshes: 1
+      importPoints: 0
+      importCurves: 1
+      createCurveRenderers: 0
+    mediaStartTime: 0
+    mediaEndTime: 0
   startTime: 0
   endTime: 2
   currentTime: 0
