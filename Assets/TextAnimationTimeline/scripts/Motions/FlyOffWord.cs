@@ -46,13 +46,13 @@ namespace TextAnimationTimeline.Motions
 
                 int num = Random.Range(0, 3);
                 string name =  $"TextPrefab/FlyOffPaper0{num}";
-                Debug.Log(name);
+                // Debug.Log(name);
                 
                 var tex = Graphics.TMProToTex2D(tmPro, 1000, textAnimationManager.CaptureCamera);
                 var obj = Instantiate(_alembicPrefabs[Random.Range(0,_alembicPrefabs.Count)]);
                
                 var renderer = obj.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
-                renderer.sharedMaterial = new Material(Resources.Load<Shader>("Materials/WaterWaveShader"));
+                renderer.sharedMaterial = new Material(renderer.sharedMaterial.shader);
                 renderer.sharedMaterial.SetTexture("_Texture2D",tex);
                 renderer.sharedMaterial.SetFloat("_Alpha",0f);
                 obj.transform.SetParent(transform);
