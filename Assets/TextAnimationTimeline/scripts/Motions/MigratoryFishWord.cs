@@ -45,13 +45,14 @@ namespace TextAnimationTimeline.Motions
             foreach (var tmPro in TextMeshElement.Children)
             {
 
-                int num = Random.Range(0, 4);
+                // Debug.Log(tmPro.text);
+                // int num = Random.Range(0, 4);
                 // string name =  $"TextPrefab/CurveFlowPlane0{num}";
                 // Debug.Log(name);
                 tmPro.color = Color.white;
-                
-                
-                var tex = Graphics.TMProToTex2D(tmPro, 1000, textAnimationManager.CaptureCamera);
+                tmPro.alpha = 1f;
+
+                var tex = Graphics.TMProToTex2D(tmPro, 16000, textAnimationManager.CaptureCamera);
                 var obj = Instantiate(_alembicPrefabs[Random.Range(0,_alembicPrefabs.Count)]);
                
                 var renderer = obj.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
@@ -75,36 +76,7 @@ namespace TextAnimationTimeline.Motions
             {
                 obj.transform.localPosition -= new Vector3(_characters.Count * width * scale / 2f, 0f, 0f);
             }
-            
-            // var randomRangeMin = new Vector3(-40, -100, -0);
-            // var randomRangeMax = new Vector3(40, 100, 0);
-            //
-            // foreach (var child in TextMeshElement.Children)
-            // {
-            //     var fadeInMotion = child.gameObject.AddComponent<RandomFlutteringMoveIn>();
-            //     fadeInMotion.Init(
-            //             child.transform.localPosition,
-            //             child.transform.localEulerAngles,
-            //             new Vector3(0,-child.fontSize*0.4f,0),
-            //             randomRangeMin,
-            //             randomRangeMax,
-            //             animationCurveAsset.SteepIn
-            //     );
-            //     // _randomFlutteringMovesFadeIn.Add(fadeInMotion);
-            //     
-            //     
-            //     
-            //     var fadeOutMotion = child.gameObject.AddComponent<RandomFlutteringMoveOut>();
-            //     fadeOutMotion.Init(
-            //         child.transform.localPosition,
-            //         child.transform.localEulerAngles,
-            //         new Vector3(0,child.fontSize*0.4f,0),
-            //         randomRangeMin,
-            //         randomRangeMax,
-            //         animationCurveAsset.SteepOut
-            //     );
-            //     _randomFlutteringMoveFadeOut.Add(fadeOutMotion);
-            // }
+           
             
         }
         
@@ -140,22 +112,7 @@ namespace TextAnimationTimeline.Motions
                     mat.SetFloat("_WavePower", (animationCurveAsset.MigrateWavePower.Evaluate(progress))*_wavePower);
                 }
             
-            //     
-            //     var inMotion = _randomFlutteringMovesFadeIn[count];
-            //     var outMotion = _randomFlutteringMoveFadeOut[count];
-            //     if (normalizedTime > delay)
-            //     {
-            //         var process = Mathf.Clamp(((float)normalizedTime - delay) / childDuration, 0f, 1f);
-            //         inMotion.OnProcess(process);
-            //         child.alpha = process;
-            //     }
-            //     var fadeOutDelay = delay + childDuration;
-            //     if (normalizedTime > fadeOutDelay)
-            //     {
-            //         var process = Mathf.Clamp(((float)normalizedTime - fadeOutDelay) / fadeOutDuration, 0f, 1f);
-            //         outMotion.OnProcess(process);
-            //         child.alpha = (1f-process);
-            //     }
+          
                 delay += delayStep;
                 count++;
             }

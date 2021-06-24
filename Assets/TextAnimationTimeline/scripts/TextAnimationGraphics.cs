@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -9,15 +10,55 @@ namespace TextAnimationTimeline.Motions
   
     public class TextAnimationGraphics : MonoBehaviour
     {
-        Dictionary<string,Texture2D> texturePool = new Dictionary<string, Texture2D>();
+        public Dictionary<string,Texture2D> texturePool = new Dictionary<string, Texture2D>();
+        public List<Texture2D> texs = new List<Texture2D>();
 //        private 
+
+        private void Start()
+        {
+            foreach (var tex in texturePool)
+            {
+                DestroyImmediate(tex.Value);
+            }
+            texturePool.Clear();
+                    
+            texs.Clear();
+        }
+
+        private void OnEnable()
+        {
+            foreach (var tex in texturePool)
+            {
+                DestroyImmediate(tex.Value);
+            }
+            texturePool.Clear();
+            
+            texs.Clear();
+        }
 
         private void Awake()
         {
+            foreach (var tex in texturePool)
+            {
+                DestroyImmediate(tex.Value);
+            }
             texturePool.Clear();
+            
+            texs.Clear();
         }
-        
-         public Texture2D TMProToTex2D(TextMeshPro text, int fontSize,Camera camera)
+
+        private void OnDestroy()
+        {
+            foreach (var tex in texturePool)
+            {
+                DestroyImmediate(tex.Value);
+            }
+            
+            texturePool.Clear();
+            texs.Clear();
+        }
+
+        public Texture2D TMProToTex2D(TextMeshPro text, int fontSize,Camera camera)
         {
             if (texturePool.ContainsKey(text.text+":"+fontSize))
             {
@@ -26,13 +67,14 @@ namespace TextAnimationTimeline.Motions
                 {
                     return poolObject;   
                 }
-                
             }
             
-            
+            text.color = Color.white;
+            text.alpha = 1f;
             text.fontSize = fontSize;
-            text.transform.localPosition = new Vector3(-9999,-9999,-9999);
-            camera.transform.localPosition = new Vector3(-9999,-9999,-9999-10);
+            text.transform.position = new Vector3(-9999,-9999,-9999);
+            text.transform.rotation = Quaternion.identity;
+            camera.transform.position = new Vector3(-9999,-9999,-9999-10);
 
             var cellSize = text.preferredWidth > text.preferredHeight ? text.preferredWidth : text.preferredHeight;
             var height = cellSize;
@@ -40,7 +82,7 @@ namespace TextAnimationTimeline.Motions
             
            
             // Debug.Log("width: " + width + "," + "height: " + height);
-            text.transform.localPosition = new Vector3(camera.transform.localPosition.x,camera.transform.localPosition.y,camera.transform.localPosition.z+1);
+            text.transform.position = new Vector3(camera.transform.localPosition.x,camera.transform.localPosition.y,camera.transform.localPosition.z+10);
             var Screen = new RenderTexture((int)width,(int)height,8,RenderTextureFormat.ARGB32);
             
             camera.targetTexture = Screen;
@@ -81,9 +123,10 @@ namespace TextAnimationTimeline.Motions
             if (!texturePool.ContainsKey(text.text+":"+fontSize))
             {
                 texturePool.Add(text.text+":"+fontSize,image);   
+                texs.Add(image);
+               
             }
             camera.gameObject.SetActive(false);
-//            DestroyImmediate(camera);
             return image;
         }
 
@@ -131,7 +174,7 @@ namespace TextAnimationTimeline.Motions
            
             Debug.Log("width: " + width + "," + "height: " + height);
 //            Debug.Log(textMesh.preferredHeight);
-            text.transform.position = new Vector3(camera.transform.position.x,camera.transform.position.y,camera.transform.position.z+1);
+            text.transform.position = new Vector3(camera.transform.position.x,camera.transform.position.y,camera.transform.position.z+10);
             var Screen = new RenderTexture((int)width,(int)height,8,RenderTextureFormat.ARGB32);
             
             camera.targetTexture = Screen;
