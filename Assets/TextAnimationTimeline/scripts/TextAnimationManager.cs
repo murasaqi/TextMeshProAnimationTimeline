@@ -32,9 +32,10 @@ namespace TextAnimationTimeline
         
         }
 
-        void Init()
+        public void Init()
         {
             _created.Clear();
+            graphics.Clear();
         }
 
         void Update()
@@ -160,6 +161,8 @@ namespace TextAnimationTimeline
 
         private void OnDestroy()
         {
+            
+            graphics.Clear();
             foreach (var mo in _created)
             {
                 if (mo != null)

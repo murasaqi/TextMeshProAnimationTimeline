@@ -16,38 +16,25 @@ namespace TextAnimationTimeline.Motions
 
         private void Start()
         {
-            foreach (var tex in texturePool)
-            {
-                DestroyImmediate(tex.Value);
-            }
-            texturePool.Clear();
-                    
-            texs.Clear();
+            Clear();
         }
 
         private void OnEnable()
         {
-            foreach (var tex in texturePool)
-            {
-                DestroyImmediate(tex.Value);
-            }
-            texturePool.Clear();
-            
-            texs.Clear();
+            Clear();
         }
 
         private void Awake()
         {
-            foreach (var tex in texturePool)
-            {
-                DestroyImmediate(tex.Value);
-            }
-            texturePool.Clear();
-            
-            texs.Clear();
+            Clear();
         }
 
         private void OnDestroy()
+        {
+            Clear();
+        }
+
+        public void Clear()
         {
             foreach (var tex in texturePool)
             {

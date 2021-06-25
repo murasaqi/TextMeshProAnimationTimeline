@@ -25,13 +25,19 @@ namespace TextAnimationTimeline
 		private List<MotionTextElement> motionTextElements = new List<MotionTextElement>();
 		private List<MotionTextElement> _motions = new List<MotionTextElement>();
 		private TextAnimationManager _textAnimationManager;
+		private bool m_FirstFrameHappened;
 		public override void ProcessFrame(Playable playable, FrameData info, object playerData)
 		{
 			_textAnimationManager = playerData as TextAnimationManager;
-	
+			
 			if (!_textAnimationManager)
 				return;
 
+			if (!m_FirstFrameHappened)
+			{
+				_textAnimationManager.Init();
+				m_FirstFrameHappened = true;
+			}
 			double time = m_PlayableDirector.time;
 			var counter = 0;
 
@@ -121,6 +127,8 @@ namespace TextAnimationTimeline
 
 		public override void OnPlayableDestroy(Playable playable)
 		{
+			m_FirstFrameHappened = false; 
+			if(_textAnimationManager != null) _textAnimationManager.Init();
 			var count = 0;
 			foreach (var clip in clips)
 			{
