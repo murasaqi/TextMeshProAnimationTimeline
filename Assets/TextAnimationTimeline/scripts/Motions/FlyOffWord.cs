@@ -48,7 +48,7 @@ namespace TextAnimationTimeline.Motions
                 string name =  $"TextPrefab/FlyOffPaper0{num}";
                 // Debug.Log(name);
                 
-                var tex = Graphics.TMProToTex2D(tmPro, 2000, textAnimationManager.CaptureCamera);
+                var tex = Graphics.TMProToTex2D(tmPro, 1500, textAnimationManager.CaptureCamera);
                 var obj = Instantiate(_alembicPrefabs[Random.Range(0,_alembicPrefabs.Count)]);
                
                 var renderer = obj.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
