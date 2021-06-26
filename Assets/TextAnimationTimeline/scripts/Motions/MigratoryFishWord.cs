@@ -52,7 +52,7 @@ namespace TextAnimationTimeline.Motions
                 tmPro.color = Color.white;
                 tmPro.alpha = 1f;
 
-                var tex = Graphics.TMProToTex2D(tmPro, 1500, textAnimationManager.CaptureCamera);
+                var tex = Graphics.TMProToTex2D(tmPro, 1800, textAnimationManager.CaptureCamera);
                 var obj = Instantiate(_alembicPrefabs[Random.Range(0,_alembicPrefabs.Count)]);
                
                 var renderer = obj.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
